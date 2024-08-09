@@ -325,6 +325,36 @@ Some condiments? We have pickled walnuts, steak sauce, mushy peas, mint sauce
 Now this is what I call a condiments tray!
 ```
 
-### Create `entry_points` in pyproject.toml
+### Create `scripts` sub-table in `pyproject.toml`
 
-TODO
+We have successfully run the `main` function from the terminal.
+However, we still haven't met our package goals, which were to run our code from the terminal using a command `eggsample`. To call the long command for `python -c` is not user-friendly and not the best way to run a command line tool.
+
+Within the `[project]` table in the `pyproject.toml` file, we can add a `[project.scripts]` sub-table to specify the command line tools that we want to create.
+
+Let's add the following to the `pyproject.toml` file:
+
+````{admonition} File: pyproject.toml
+```toml
+[project.scripts]
+eggsample = "eggsample.command_line_interface:main"
+```
+````
+
+Once you've added the `[project.scripts]` sub-table to the `pyproject.toml` file, you need to re-install the package again using `pip` since we've made changes to the metadata. The rule of thumb is that whenever you make changes to the metadata, you need to re-install the package.:
+
+```bash
+pip install -e ./eggsample_repo
+```
+
+Now, you should be able to run the `eggsample` command from the terminal:
+
+```bash
+eggsample
+```
+
+```console
+Your food. Enjoy some magnificent spam, pepper, salt, egg, egg, egg, wonderous spam, splendiferous spam, lovely spam, egg, egg
+Some condiments? We have pickled walnuts, steak sauce, mushy peas, mint sauce
+Now this is what I call a condiments tray!
+```
